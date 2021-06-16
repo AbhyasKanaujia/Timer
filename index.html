@@ -18,43 +18,56 @@
         class="container w-25 d-flex flex-column justify-content-center align-items-center text-light">
 
         <div class="d-flex flex-row align-items-baseline justify-content-center">
+
             <div class="d-flex flex-column align-items-center">
-                <h1 class="display-1 pb-0 mb-0">00</h1>
+                <h1 id="hourDisplay" class="display-1 pb-0 mb-0">00</h1>
                 <p>hr</p>
             </div>
 
             <h1 class="display-1">:</h1>
 
             <div class="d-flex flex-column align-items-center">
-                <h1 class="display-1 pb-0 mb-0">00</h1>
+                <h1 id="minuteDisplay" class="display-1 pb-0 mb-0">00</h1>
                 <p>min</p>
             </div>
 
             <h1 class="display-1">:</h1>
 
             <div class="d-flex flex-column align-items-center">
-                <h1 class="display-1 pb-0 mb-0">00</h1>
+                <h1 id="secondDisplay" class="display-1 pb-0 mb-0">00</h1>
                 <p>sec</p>
             </div>
 
             <h1 class="display-1">.</h1>
-            <h4 class="display-4">00</h4>
+            <h4 id="millisecondDisplay" class="display-4" style="width: 2rem;">0</h4>
         </div>
         <div class="d-flex flex-row justify-content-evenly w-100">
-            <button class="btn" onclick="startTimer()">
-                <i class="fas fa-play bg-success text-white p-4 rounded-circle"></i>
+            <button class="btn" onclick="toggleTimer()">
+                <i id="toggleButtonIcon" class="fas fa-play bg-success text-white p-3 p-md-4 rounded-circle"></i>
             </button>
 
-            <button class="btn">
-                <i class="fas fa-flag bg-primary text-white p-4 rounded-circle"></i>
+            <button class="btn" id="flagButton" disabled>
+                <i class="fas fa-flag bg-primary text-white p-3 p-md-4 rounded-circle"></i>
             </button>
 
-            <button class="btn" onclick="stopTimer()">
-                <i class="fas fa-power-off bg-danger text-white p-4 rounded-circle"></i>
+            <button class="btn" onclick="resetTimer()" id="stopButton" disabled>
+                <i class="fas fa-power-off bg-danger text-white p-3 p-md-4 rounded-circle"></i>
             </button>
         </div>
 
     </div>
+
+
+    <!-- app's js -->
+    <script src="./scripts/timer.js"></script>
+
+    <!-- Moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+        integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/0f7fa7f787.js" crossorigin="anonymous"></script>
