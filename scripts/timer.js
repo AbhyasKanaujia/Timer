@@ -33,8 +33,8 @@ function timerCycle() {
 
 function updateUINewTime(hour, minute, second, millisecond) {
     hour = parseInt(hour);
-    minute = parseInt(minute);
-    second = parseInt(second);
+    minute = parseInt(minute) % 60;
+    second = parseInt(second) % 60;
     millisecond = parseInt(millisecond % 10);
 
     if (hour < 10) hour = '0' + hour;
