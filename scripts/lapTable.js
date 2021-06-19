@@ -86,8 +86,8 @@ function addRow(currentLapTime, totalTime) {
 
 function differenceToString(difference) {
     var hour = parseInt(difference.as('hours'));
-    var minute = parseInt(difference.as('minutes'));
-    var second = parseInt(difference.as('seconds'));
+    var minute = parseInt(difference.as('minutes')) % 60;
+    var second = parseInt(difference.as('seconds')) % 60;
     var millisecond = parseInt(parseInt(difference.as('milliseconds')) % 1000 / 100);
 
 
