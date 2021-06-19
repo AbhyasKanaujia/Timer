@@ -18,7 +18,7 @@
 
     <div class="container row mx-auto" style="height: 100vh">
         <!-- Time With Buttons container -->
-        <div class="container d-flex flex-column justify-content-center text-light align-items-center">
+        <div class="h-50 col container d-flex flex-column justify-content-center text-light align-items-center">
 
             <!-- Time Container -->
             <div class="d-flex flex-row align-items-baseline">
@@ -52,7 +52,7 @@
                     <i id="toggleButtonIcon" class="fas fa-play bg-success text-white p-3 p-md-4 rounded-circle"></i>
                 </button>
 
-                <button class="btn" id="flagButton" disabled title="Lap">
+                <button class="btn" id="flagButton" onclick="lap()" disabled title="Lap">
                     <i class="fas fa-flag bg-primary text-white p-3 p-md-4 rounded-circle"></i>
                 </button>
 
@@ -61,12 +61,18 @@
                 </button>
             </div>
         </div>
-        <div id="lapsContainer">Hello </div>
+        <!-- Lap Table -->
+        <div class="h-100 d-flex flex-column col-md-6 text-center py-md-5 my-md-5" id="lapsContainer">
+            <table id="lapTable" class="table, table-dark">
+
+            </table>
+        </div>
     </div>
 
     <!-- app's js -->
     <script src="./scripts/timer.js"></script>
     <script src="./scripts/animation.js"></script>
+    <script src="./scripts/lapTable.js"></script>
 
     <!-- Animation library: anime.js  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"
@@ -78,8 +84,6 @@
         integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <!-- JQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
