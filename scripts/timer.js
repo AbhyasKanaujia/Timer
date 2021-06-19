@@ -41,7 +41,7 @@ function updateUINewTime(hour, minute, second, millisecond) {
     hour = parseInt(hour);
     minute = parseInt(minute);
     second = parseInt(second);
-    millisecond = parseInt(millisecond % 10);
+    millisecond = parseInt((millisecond % 1000) / 100);
 
     if (hour < 10) hour = '0' + hour;
     if (minute < 10) minute = '0' + minute;
