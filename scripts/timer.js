@@ -10,8 +10,8 @@ function toggleTimer() {
     timerRunning = !timerRunning;
     initializeTimer();
     if (timerRunning) {
-        timerCycle();
         allowLapOnceAfterPause = true;
+        timerCycle();
     }
     updateUIToggle();
 
@@ -29,7 +29,7 @@ function initializeTimer() {
 
     if (currentStartTimeAsLapBegin) {
         lapBegin = moment();
-        currentStartTimeAsLapBegin = false
+        currentStartTimeAsLapBegin = false;
     }
 }
 
@@ -37,6 +37,7 @@ function resetTimer() {
     timerRunning = false;
     initialState = true;
     resetLapTable();
+    resetLapChart();
     updateUINewTime(0, 0, 0, 0);
     updateUIReset();
 }
@@ -46,8 +47,9 @@ function lap() {
         var now = moment();
         var currentLapTime = moment.duration(now.diff(lapBegin));
         var totalTime = moment.duration(now.diff(beginTime));
-        updateLapTable(currentLapTime, totalTime);
         lapBegin = moment(now);
+        updateLapTable(currentLapTime, totalTime);
+        updateLapChart();
     }
     if (!timerRunning && allowLapOnceAfterPause) {
         var pausedAt = moment(beginTime).add(difference);
@@ -55,6 +57,7 @@ function lap() {
         var totalTime = moment.duration(pausedAt.diff(beginTime));
 
         updateLapTable(currentLapTime, totalTime);
+        updateLapChart();
         lapBegin = moment(now);
         allowLapOnceAfterPause = false;
         currentStartTimeAsLapBegin = true;
@@ -76,7 +79,7 @@ function updateUINewTime(hour, minute, second, millisecond) {
     hour = parseInt(hour);
     minute = parseInt(minute) % 60;
     second = parseInt(second) % 60;
-    millisecond = parseInt(millisecond % 10);
+    millisecond = parseInt(parseInt(millisecond) % 1000 / 100);
 
     if (hour < 10) hour = '0' + hour;
     if (minute < 10) minute = '0' + minute;

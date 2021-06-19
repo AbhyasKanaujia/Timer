@@ -1,16 +1,21 @@
 var lapUsed = false;
 var lapTable;
 var rowCount = 0;
+var previousFastest = null;
+var previousSlowest = null;
 
 function updateLapTable(currentLapTime, totalTime) {
+    addLap(currentLapTime);
     if (!lapUsed) initializeTable();
-    addRow(currentLapTime, totalTime)
-
+    addRow(currentLapTime, totalTime);
 }
 
 function resetLapTable() {
     rowCount = 0;
+    previousSlowest = null;
+    previousFastest = null;
     lapUsed = false;
+    resetLapModel();
     document.querySelector('#lapTable').innerHTML = "";
 }
 
@@ -27,13 +32,44 @@ function initializeTable() {
         tableHeaders.appendChild(header);
     });
 
-
-
-    // var x = document.getElementById("myList").lastChild.innerHTML;
-
-
     lapUsed = true;
 }
+
+function addFastestBadge() {
+    var fastestLap = getFastestLap();
+    if (previousFastest != fastestLap) {
+        var lapTable = document.getElementById('lapTable');
+        if (previousFastest !== null) { // remove previous fastest badge
+            var rowToUpdate = lapTable.childNodes[lapTable.childElementCount - previousFastest - 1];
+            var cellToUpdate = rowToUpdate.childNodes[0];
+            cellToUpdate.removeChild(document.getElementById('fastestTableBadge'));
+        }
+        // add new badge
+        var rowToUpdate = lapTable.childNodes[lapTable.childElementCount - fastestLap - 1];
+        var cellToUpdate = rowToUpdate.childNodes[0];
+        cellToUpdate.innerHTML += ' <span class="badge bg-success" id="fastestTableBadge">Fastest</span>';
+        previousFastest = fastestLap;
+    }
+}
+
+
+function addSlowestBadge() {
+    var slowestLap = getSlowestLap();
+    if (slowestLap == (rowCount - 1)) {
+        var lapTable = document.getElementById('lapTable');
+        if (previousSlowest !== null) { // remove previous slowest badge
+            var rowToUpdate = lapTable.childNodes[lapTable.childElementCount - previousSlowest - 1];
+            var cellToUpdate = rowToUpdate.childNodes[0];
+            cellToUpdate.removeChild(document.getElementById('slowestTableBadge'));
+        }
+        // add new badge
+        var rowToUpdate = lapTable.childNodes[lapTable.childElementCount - slowestLap - 1];
+        var cellToUpdate = rowToUpdate.childNodes[0];
+        cellToUpdate.innerHTML += ' <span class="badge bg-danger" id="slowestTableBadge">Slowest</span>';
+        previousSlowest = slowestLap;
+    }
+}
+
 
 function addRow(currentLapTime, totalTime) {
     var row = document.querySelector('#lapTable').insertRow(1);
@@ -44,6 +80,8 @@ function addRow(currentLapTime, totalTime) {
         cell.innerHTML = value;
         row.appendChild(cell);
     });
+    addFastestBadge();
+    addSlowestBadge();
 }
 
 function differenceToString(difference) {
