@@ -1,7 +1,6 @@
 var timerRunning = false;
 var initialState = true;
 var beginTime;
-var timerDisplay;
 var difference;
 
 function toggleTimer() {
@@ -19,6 +18,13 @@ function initializeTimer() {
     } else {
         beginTime = moment().subtract(difference);
     }
+}
+
+function resetTimer() {
+    timerRunning = false;
+    initialState = true;
+    updateUINewTime(0, 0, 0, 0);
+    updateUIReset();
 }
 
 function timerCycle() {
@@ -41,27 +47,33 @@ function updateUINewTime(hour, minute, second, millisecond) {
     if (minute < 10) minute = '0' + minute;
     if (second < 10) second = '0' + second;
 
-    $('#hourDisplay').text(hour);
-    $('#minuteDisplay').text(minute);
-    $('#secondDisplay').text(second);
-    $('#millisecondDisplay').text(millisecond);
+    document.querySelector('#hourDisplay').innerText = hour;
+    document.querySelector('#minuteDisplay').innerText = minute;
+    document.querySelector('#secondDisplay').innerText = second;
+    document.querySelector('#millisecondDisplay').innerText = millisecond;
 }
 
 
 function updateUIToggle() {
     if (!initialState) {
-        $('#stopButton').prop('disabled', false);
-        $('#flagButton').prop('disabled', false);
+        document.querySelector('#stopButton').disabled = false;
+        document.querySelector('#flagButton').disabled = false;
     }
     if (timerRunning) {
-        $('#toggleButtonIcon').removeClass('fa-play');
-        $('#toggleButtonIcon').addClass('fa-pause');
-        $('#stopButton').prop('disabled', false);
-        $('#flagButton').prop('disabled', false);
-    } else {
-        $('#toggleButtonIcon').removeClass('fa-pause');
-        $('#toggleButtonIcon').addClass('fa-play');
+        document.querySelector('#toggleButtonIcon').classList.remove('fa-play');
+        document.querySelector('#toggleButtonIcon').classList.add('fa-pause');
     }
+    else {
+        document.querySelector('#toggleButtonIcon').classList.remove('fa-pause');
+        document.querySelector('#toggleButtonIcon').classList.add('fa-play');
+    }
+
 
 }
 
+function updateUIReset() {
+    document.querySelector('#stopButton').disabled = false;
+    document.querySelector('#flagButton').disabled = false;
+    document.querySelector('#toggleButtonIcon').classList.remove('fa-pause');
+    document.querySelector('#toggleButtonIcon').classList.add('fa-play');
+}
