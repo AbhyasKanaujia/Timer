@@ -1,6 +1,6 @@
 # Timer
 
-Timer app I made for myself because others didn't do what I needed/wanted.
+Timer app. 
 
 https://abhyaskanaujia.github.io/Timer/
 
